@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的资源库 - 个人收藏分享站</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+</head>
+<body>
+<!-- 顶部导航 -->
+<header class="header">
+    <nav class="navbar">
+        <div class="nav-brand">
+            <i class="fas fa-box-archive"></i>
+            <span>我的资源库</span>
+        </div>
+
+        <div class="nav-search">
+            <input type="text" id="search-input" placeholder="搜索资源...">
+            <button class="search-btn">
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
+
+        <div class="nav-actions">
+            <button class="btn-upload" id="upload-btn">
+                <i class="fas fa-cloud-upload-alt"></i>
+                <span>上传资源</span>
+            </button>
+            <button class="theme-toggle" id="theme-toggle">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </nav>
+</header>
+
+<!-- 侧边栏分类 -->
+<div class="container">
+    <aside class="sidebar">
+        <div class="sidebar-section">
+            <h3><i class="fas fa-filter"></i> 资源分类</h3>
+            <ul class="category-list">
+                <li class="active" data-category="all">
+                    <i class="fas fa-th-large"></i> 全部资源
+                </li>
+                <li data-category="video">
+                    <i class="fas fa-video"></i> 视频教程
+                </li>
+                <li data-category="image">
+                    <i class="fas fa-images"></i> 图片素材
+                </li>
+                <li data-category="software">
+                    <i class="fas fa-download"></i> 软件安装包
+                </li>
+                <li data-category="document">
+                    <i class="fas fa-file-alt"></i> 文档资料
+                </li>
+                <li data-category="audio">
+                    <i class="fas fa-music"></i> 音频文件
+                </li>
+                <li data-category="other">
+                    <i class="fas fa-archive"></i> 其他资源
+                </li>
+            </ul>
+        </div>
+
+        <div class="sidebar-section">
+            <h3><i class="fas fa-tags"></i> 热门标签</h3>
+            <div class="tag-cloud">
+                <span class="tag">设计素材</span>
+                <span class="tag">开发工具</span>
+                <span class="tag">教程视频</span>
+                <span class="tag">实用软件</span>
+                <span class="tag">学习资料</span>
+                <span class="tag">高清壁纸</span>
+            </div>
+        </div>
+
+        <div class="sidebar-stats">
+            <h3><i class="fas fa-chart-bar"></i> 统计信息</h3>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-number" id="total-files">0</span>
+                    <span class="stat-label">总文件数</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="total-size">0 GB</span>
+                    <span class="stat-label">总大小</span>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- 主内容区 -->
+    <main class="main-content">
+        <!-- 资源网格 -->
+        <div class="resource-header">
+            <h2><i class="fas fa-boxes"></i> 我的资源库</h2>
+            <div class="view-controls">
+                <button class="view-btn active" data-view="grid">
+                    <i class="fas fa-th-large"></i>
+                </button>
+                <button class="view-btn" data-view="list">
+                    <i class="fas fa-list"></i>
+                </button>
+                <select id="sort-select">
+                    <option value="newest">最新优先</option>
+                    <option value="oldest">最早优先</option>
+                    <option value="name">名称排序</option>
+                    <option value="size">大小排序</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- 资源展示区 -->
+        <div class="resource-grid" id="resource-grid">
+            <!-- 资源卡片将通过JavaScript动态生成 -->
+            <!-- 示例卡片： -->
+            <div class="resource-card" data-category="video" data-tags="教程,编程">
+                <div class="card-header">
+                    <span class="card-category video">视频</span>
+                    <div class="card-actions">
+                        <button class="action-btn" title="下载">
+                            <i class="fas fa-download"></i>
+                        </button>
+                        <button class="action-btn" title="分享">
+                            <i class="fas fa-share-alt"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-preview">
+                    <i class="fas fa-play-circle"></i>
+                    <img src="assets/video-thumb.jpg" alt="视频预览">
+                </div>
+                <div class="card-body">
+                    <h3 class="card-title">Web开发入门教程.mp4</h3>
+                    <p class="card-description">完整的HTML+CSS+JavaScript教程，适合初学者</p>
+                    <div class="card-meta">
+                        <span><i class="far fa-clock"></i> 2023-10-15</span>
+                        <span><i class="fas fa-weight-hanging"></i> 450 MB</span>
+                    </div>
+                    <div class="card-tags">
+                        <span class="tag">教程</span>
+                        <span class="tag">编程</span>
+                        <span class="tag">前端</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 更多卡片... -->
+        </div>
+
+        <!-- 无资源提示 -->
+        <div class="empty-state" id="empty-state">
+            <i class="fas fa-cloud-upload-alt"></i>
+            <h3>暂无资源</h3>
+            <p>点击上方"上传资源"按钮添加你的第一个资源</p>
+        </div>
+    </main>
+</div>
+
+<!-- 上传模态框 -->
+<div class="modal" id="upload-modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3><i class="fas fa-cloud-upload-alt"></i> 上传资源</h3>
+            <button class="close-btn" id="close-upload">&times;</button>
+        </div>
+        <div class="modal-body">
+            <div class="upload-zone" id="upload-zone">
+                <i class="fas fa-cloud-upload-alt upload-icon"></i>
+                <p>拖放文件到此处，或点击选择文件</p>
+                <input type="file" id="file-input" multiple style="display: none;">
+                <button class="btn-primary" id="select-files">选择文件</button>
+            </div>
+
+            <div class="upload-form">
+                <div class="form-group">
+                    <label for="resource-name"><i class="fas fa-heading"></i> 资源名称</label>
+                    <input type="text" id="resource-name" placeholder="输入资源名称">
+                </div>
+
+                <div class="form-group">
+                    <label for="resource-category"><i class="fas fa-folder"></i> 分类</label>
+                    <select id="resource-category">
+                        <option value="video">视频教程</option>
+                        <option value="image">图片素材</option>
+                        <option value="software">软件安装包</option>
+                        <option value="document">文档资料</option>
+                        <option value="audio">音频文件</option>
+                        <option value="other">其他资源</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="resource-tags"><i class="fas fa-tags"></i> 标签（用逗号分隔）</label>
+                    <input type="text" id="resource-tags" placeholder="例如：教程,编程,素材">
+                </div>
+
+                <div class="form-group">
+                    <label for="resource-desc"><i class="fas fa-align-left"></i> 描述</label>
+                    <textarea id="resource-desc" rows="3" placeholder="资源的简要描述..."></textarea>
+                </div>
+            </div>
+
+            <div class="upload-progress" id="upload-progress">
+                <div class="progress-bar">
+                    <div class="progress-fill"></div>
+                </div>
+                <span class="progress-text">等待上传...</span>
+            </div>
+
+            <div class="upload-actions">
+                <button class="btn-secondary" id="cancel-upload">取消</button>
+                <button class="btn-primary" id="start-upload" disabled>开始上传</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 资源详情模态框 -->
+<div class="modal" id="detail-modal">
+    <!-- 内容通过JS动态生成 -->
+</div>
+
+<!-- 底部信息 -->
+<footer class="footer">
+    <div class="footer-content">
+        <div class="footer-section">
+            <h3><i class="fas fa-box-archive"></i> 我的资源库</h3>
+            <p>个人资源收集与分享平台</p>
+        </div>
+        <div class="footer-section">
+            <h4>存储信息</h4>
+            <div class="storage-info">
+                <div class="storage-bar">
+                    <div class="storage-used"></div>
+                </div>
+                <span>已使用：<span id="used-storage">0 GB</span> / 10 GB</span>
+            </div>
+        </div>
+        <div class="footer-section">
+            <h4>支持格式</h4>
+            <div class="supported-formats">
+                <span class="format-tag">MP4/AVI/MOV</span>
+                <span class="format-tag">JPG/PNG/GIF</span>
+                <span class="format-tag">EXE/DMG/ZIP</span>
+                <span class="format-tag">PDF/DOC/PPT</span>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2023 我的资源库 | 仅供个人使用</p>
+    </div>
+</footer>
+
+<!-- JavaScript文件 -->
+<script src="js/main.js"></script>
+<script src="js/filter.js"></script>
+<script src="js/upload.js"></script>
+</body>
+</html>
